@@ -1,7 +1,22 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, Fragment, useEffect, useRef } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import {
+  EditInactiveIcon,
+  EditActiveIcon,
+  DuplicateInactiveIcon,
+  DuplicateActiveIcon,
+  ArchiveInactiveIcon,
+  ArchiveActiveIcon,
+  MoveInactiveIcon,
+  MoveActiveIcon,
+  DeleteInactiveIcon,
+  DeleteActiveIcon,
+} from './icons';
+import { ChevronDownIcon } from '@heroicons/react/solid';
+
 const Nav = () => {
   const router = useRouter();
 
@@ -53,7 +68,122 @@ const Nav = () => {
             </div>
           </div>
           <div className="hidden md:block">
-            <div className="ml-4 flex items-center md:ml-6">
+            {/* <div className="text-blue-600">Hello</div> */}
+            <Menu as="div" className="relative inline-block text-left">
+              {({ open }) => (
+                <>
+                  <div>
+                    <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                      Options
+                      <ChevronDownIcon className="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100" aria-hidden="true" />
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    show={open}
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items
+                      static
+                      className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    >
+                      <div className="px-1 py-1 ">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              className={`${
+                                active ? 'bg-purple-500 text-white' : 'text-gray-900'
+                              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                            >
+                              {active ? (
+                                <EditActiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                              ) : (
+                                <EditInactiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                              )}
+                              Засах
+                            </button>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              className={`${
+                                active ? 'bg-purple-500 text-white' : 'text-gray-900'
+                              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                            >
+                              {active ? (
+                                <DuplicateActiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                              ) : (
+                                <DuplicateInactiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                              )}
+                              Хувьлах
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </div>
+                      <div className="px-1 py-1">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              className={`${
+                                active ? 'bg-purple-500 text-white' : 'text-gray-900'
+                              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                            >
+                              {active ? (
+                                <ArchiveActiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                              ) : (
+                                <ArchiveInactiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                              )}
+                              Архив
+                            </button>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              className={`${
+                                active ? 'bg-purple-500 text-white' : 'text-gray-900'
+                              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                            >
+                              {active ? (
+                                <MoveActiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                              ) : (
+                                <MoveInactiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                              )}
+                              Зөөх
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </div>
+                      <div className="px-1 py-1">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              className={`${
+                                active ? 'bg-purple-500 text-white' : 'text-gray-900'
+                              } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                            >
+                              {active ? (
+                                <DeleteActiveIcon className="w-5 h-5 mr-2 text-violet-400" aria-hidden="true" />
+                              ) : (
+                                <DeleteInactiveIcon className="w-5 h-5 mr-2 text-violet-400" aria-hidden="true" />
+                              )}
+                              Устгах
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </div>
+                    </Menu.Items>
+                  </Transition>
+                </>
+              )}
+            </Menu>
+            {/* <div className="ml-4 flex items-center md:ml-6">
               <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <span className="sr-only">View notifications</span>
                 <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -103,10 +233,10 @@ const Nav = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="-mr-2 flex md:hidden">
-            <button
+            {/* <button
               type="button"
               className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
               aria-controls="mobile-menu"
@@ -135,7 +265,7 @@ const Nav = () => {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
