@@ -29,9 +29,9 @@ const Home = ({ data }) => {
                   value="Opt1"
                   class="appearance-none border-1 p-4 m-3 rounded-md bg-blue-400 checked:bg-blue-600 checked:border-transparent"
                 /> */}
-                <input type="checkbox" class="form-checkbox rounded text-pink-500 p-2 m-5" />
+                <input type="checkbox" className="form-checkbox rounded text-pink-500 p-2 m-5" />
                 <br />
-                <input type="email" placeholder="Email" class="form-input p-2 border-transparent shadow-md rounded-md" />
+                <input type="email" placeholder="Email" className="form-input p-2 border-transparent shadow-md rounded-md" />
                 <br />
                 <br />
                 <br />
@@ -41,10 +41,11 @@ const Home = ({ data }) => {
                   <option value="1">A</option>
                   <option value="2">B</option>
                   <option value="3">C</option>
-                  <option value="4">D</option>
+                  <option value="4">E</option>
+                  <option value="5">F</option>
+                  <option value="6">G</option>
                 </select>
               </div>
-
               <br />
               <input
                 placeholder="Email..."
