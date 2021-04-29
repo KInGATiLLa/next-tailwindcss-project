@@ -1,6 +1,6 @@
-// import {baseUrl} from '../config';
+import { baseUrl } from '../config';
 
-// const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 import styles from '../styles/Home.module.css';
 
@@ -56,34 +56,33 @@ const Home = ({ data }) => {
               </button>
             </form>
           </div>
+          <div>
+            {data &&
+              data.data.map(({ id, name }) => {
+                return (
+                  <a href="#" key={id}>
+                    <h3>{id}</h3>
+                    <p>{name}</p>
+                  </a>
+                );
+              })}
+          </div>
         </div>
       </main>
     </>
-
-    // <div>
-    //   {data &&
-    //     data.data.map(({id, name}) => {
-    //       return (
-    //         <a href="#" key={id}>
-    //           <h3>{id}</h3>
-    //           <p>{name}</p>
-    //         </a>
-    //       );
-    //     })}
-    // </div>
   );
 };
 
-// export async function getStaticProps(context) {
-//   const data = await fetcher(baseUrl);
-//   if (!data) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-//   return {
-//     props: {data},
-//   };
-// }
+export async function getStaticProps(context) {
+  const data = await fetcher(baseUrl);
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: { data },
+  };
+}
 
 export default Home;
